@@ -263,6 +263,7 @@
 
     <Button
         android:id="@+id/request_button"
+        android:layout_marginStart="52dp"
         android:layout_marginBottom="0dp"
         android:layout_width="50dp"
         android:layout_height="50dp"
