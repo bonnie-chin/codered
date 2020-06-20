@@ -17,7 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class RequestActivity extends AppCompatActivity {
 
-    private Button submitButton;
+    private Button submitButton, locationButton;
     private EditText messageEditText;
     private Spinner productSpinner;
 
@@ -32,6 +32,14 @@ public class RequestActivity extends AppCompatActivity {
 
         /*fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);*/
 
+        locationButton = findViewById(R.id.location_button);
+        locationButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                // open map here
+            }
+        });
+
         submitButton = findViewById(R.id.submit_button);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +51,7 @@ public class RequestActivity extends AppCompatActivity {
         messageEditText = findViewById(R.id.message_text);
         productSpinner = findViewById(R.id.products_spinner);
 
+
     }
 
     private void submitRequest(){
@@ -53,8 +62,9 @@ public class RequestActivity extends AppCompatActivity {
         // get whatever data is currently selected on the screen
         String message = messageEditText.getText().toString();
         int product = productSpinner.getSelectedItemPosition();
+        String code = Request.generateCode();
         // creates new request object
-        Request r = new Request(rId, product, message);
+        Request r = new Request(rId, product, message, code);
         requestRef.child(rId).setValue(r)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
